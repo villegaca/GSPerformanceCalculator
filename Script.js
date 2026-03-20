@@ -150,23 +150,6 @@ function resetARAValues() {
     turnTimeInput.style.backgroundColor = "white";
 }
 
-// document.querySelectorAll(".question-btn").forEach(button => {
-//     button.addEventListener("click", () => {
-
-//         // close all first
-//         document.querySelectorAll(".tooltip-box").forEach(t => {
-//             t.style.display = "none";
-//         });
-
-//         const tooltip = button.parentElement.querySelector(".tooltip-box");
-
-//         if (tooltip) {
-//             tooltip.style.display = "flex";
-//         }
-//     });
-// });
-
-// 1. Function to close all tooltips
 function closeAllTooltips() {
     document.querySelectorAll(".tooltip-box").forEach(t => {
         t.style.display = "none";
@@ -176,27 +159,20 @@ function closeAllTooltips() {
 // 2. Button Click Listener
 document.querySelectorAll(".question-btn").forEach(button => {
     button.addEventListener("click", (event) => {
-        // This is the magic line! It stops the click from reaching the "body" 
-        // and immediately triggering the close function below.
         event.stopPropagation();
 
         const tooltip = button.parentElement.querySelector(".tooltip-box");
         
-        // Check if THIS specific tooltip is already visible
         const isVisible = tooltip && tooltip.style.display === "flex";
 
-        // Close everything first to be safe
         closeAllTooltips();
 
-        // If it wasn't visible before, open it now.
-        // If it WAS visible, we leave it hidden (toggling it off).
         if (tooltip && !isVisible) {
             tooltip.style.display = "flex";
         }
     });
 });
 
-// 3. Global Click Listener (Click anywhere else to close)
 document.addEventListener("click", () => {
     closeAllTooltips();
 });

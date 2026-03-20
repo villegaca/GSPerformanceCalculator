@@ -2,7 +2,6 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    /* background-color: black; */
     background-color: #f5f7fa;
     margin: 0 auto;
     min-height: 100vh;
@@ -114,8 +113,6 @@ body {
     background-color: orange;
     position: absolute;
     top: 65px;
-    /* left: 150px; */
-    /* right: 40px; */
     z-index: 100;
 }
 
