@@ -2,7 +2,7 @@
   "name": "GS Performance Calculator",
   "short_name": "GS Calc",
   "description": "Performance tracking calculator for CAs and ARAs.",
-  "start_url": "/index.html",
+  "start_url": "./index.html",
   "display": "standalone",
   "background_color": "#f5f7fa",
   "theme_color": "#ffa500",
