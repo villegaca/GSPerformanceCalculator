@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GS Performance Calculator</title>
+
+    <link rel="stylesheet" href="Style.css">
+    <link rel="manifest" href="manifest.json">
+</head>
+<body>
+    <div class="main-container">
+        <div class="title-container">
+            <img src="Geek_Squad_logo_(new).svg">
+            <h2>Performance Calculator</h2>
+        </div>
+        <div class="mode-selector">
+            <button class="ca-btn" onclick="switchMode('CA')">CA</button>
+            <button class="ara-btn" onclick="switchMode('ARA')">ARA</button>
+        </div>
+        <div id="ca-metrics" class="hidden">
+            <div class="result-container">
+                <div class="input-container">
+                    <input placeholder="Memberships" type="number" id="membershipInput">
+                    <button class="question-btn">?</button>
+                    <div class="tooltip-box">
+                        <strong class="goal-title">Membership Goals</strong>
+                        <div class="goal-container-wrapper">
+                            <div class="goal-container">
+                                <span class="dot-green"></span>
+                                <span class="goal-txt">1 per 8 hrs or better</span>
+                            </div>
+                            <div class="goal-container">
+                                <span class="dot-yellow"></span>
+                                <span class="goal-txt">1 per 9 hrs - 1 per 12 hrs</span>
+                            </div>
+                            <div class="goal-container">
+                                <span class="dot-red"></span>
+                                <span class="goal-txt">1 per 13 hrs or worse</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="input-container">
+                    <input placeholder="Agent ISP" type="number" id="ISPInput">
+                    <button class="question-btn">?</button>
+                    <div class="tooltip-box">
+                        <strong class="goal-title">ISP Goals</strong>
+                        <div class="goal-container-wrapper">
+                            <div class="goal-container">
+                                <span class="dot-green"></span>
+                                <span class="goal-txt">30 or better</span>
+                            </div>
+                            <div class="goal-container">
+                                <span class="dot-yellow"></span>
+                                <span class="goal-txt">25 - 29</span>
+                            </div>
+                            <div class="goal-container">
+                                <span class="dot-red"></span>
+                                <span class="goal-txt">24 or worse</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="input-container">
+                    <input placeholder="Tags Per Hour" type="number" id="tagInput">
+                    <button class="question-btn" id="questionBtn">?</button>
+                    <div class="tooltip-box">
+                        <strong class="goal-title">Tags Per Hour Goals</strong>
+                        <div class="goal-container-wrapper">
+                            <div class="goal-container">
+                                <span class="dot-green"></span>
+                                <span class="goal-txt">1.0 or better</span>
+                            </div>
+                            <div class="goal-container">
+                                <span class="dot-yellow"></span>
+                                <span class="goal-txt">0.5 - 0.9</span>
+                            </div>
+                            <div class="goal-container">
+                                <span class="dot-red"></span>
+                                <span class="goal-txt">0.4 or worse</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="adjustment-container">
+                <h2>Hours Worked</h2>
+                <div class="numeric-adjustment">
+                    <button class="negative-btn" id="decrease-hours-btn" onclick="decreaseHours()">-</button>
+                    <input placeholder="0" type="number" id="hoursInput">
+                    <button class="positive-btn" id="increase-hours-btn" onclick="increaseHours()">+</button>
+                </div>
+            </div>
+            <div class="adjustment-container">
+                <h2>Memberships</h2>
+                <div class="numeric-adjustment">
+                    <button class="negative-btn" id="decrease-membership-btn" onclick="decreaseMemberships()">-</button>
+                    <input placeholder="0" type="number" id="membershipCount">
+                    <button class="positive-btn" id="increase-membership-btn" onclick="increaseMemberships()">+</button>
+                </div>
+            </div>
+            <div class="submit-btn-container">
+                <button type="button" class="submit-btn" onclick="calculateCAPerformance()">Submit</button>
+            </div>
+        </div>
+        <div id="ara-metrics" class="hidden">
+            <div class="result-container">
+                <div class="input-container">
+                    <input placeholder="Utilization" type="number" id="utilizationInput">
+                    <button class="question-btn">?</button>
+                    <div class="tooltip-box">
+                        <strong class="goal-title">Utilization Goals</strong>
+                        <div class="goal-container-wrapper">
+                            <div class="goal-container">
+                                <span class="dot-green"></span>
+                                <span class="goal-txt">77 or better</span>
+                            </div>
+                            <div class="goal-container">
+                                <span class="dot-yellow"></span>
+                                <span class="goal-txt">70 - 76</span>
+                            </div>
+                            <div class="goal-container">
+                                <span class="dot-red"></span>
+                                <span class="goal-txt">69 or worse</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="input-container">
+                    <input placeholder="Turn Time" type="number" id="turnTimeInput">
+                    <button class="question-btn">?</button>
+                    <div class="tooltip-box">
+                        <strong class="goal-title">Turn-Time Goals</strong>
+                        <div class="goal-container-wrapper">
+                            <div class="goal-container">
+                                <span class="dot-green"></span>
+                                <span class="goal-txt">2 days or less</span>
+                            </div>
+                            <div class="goal-container">
+                                <span class="dot-yellow"></span>
+                                <span class="goal-txt">2.1 - 3 days</span>
+                            </div>
+                            <div class="goal-container">
+                                <span class="dot-red"></span>
+                                <span class="goal-txt">3.1 or worse</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="submit-btn-container">
+                <button type="button" class="submit-btn" onclick="calculateARAPerformance()">Submit</button>
+            </div>
+        </div>
+        <!-- <div class="result-container">
+            <div class="input-container">
+                <input placeholder="Paid Memberships" type="number" id="membershipInput">
+                <button class="question-btn">?</button>
+            </div>
+            <div class="input-container">
+                <input placeholder="Agent ISP" type="number" id="ISPInput">
+                <button class="question-btn">?</button>
+            </div>
+            <div class="input-container">
+                <input placeholder="Tags Per Hour" type="number" id="tagInput">
+                <button class="question-btn">?</button>
+            </div>
+            <div class="input-container">
+                <input placeholder="Utilization" type="number" id="utilizationInput">
+                <button class="question-btn">?</button>
+            </div>
+            <div class="input-container">
+                <input placeholder="Turn Time" type="number" id="turnTimeInput">
+                <button class="question-btn">?</button>
+            </div>
+        </div> -->
+        <!-- <div class="adjustment-container">
+            <h2>Hours Worked</h2>
+            <div class="numeric-adjustment">
+                <button class="negative-btn" id="decrease-hours-btn" onclick="decreaseHours()">-</button>
+                <input placeholder="0" type="number" id="hoursInput">
+                <button class="positive-btn" id="increase-hours-btn" onclick="increaseHours()">+</button>
+            </div>
+        </div>
+        <div class="adjustment-container">
+            <h2>Memberships</h2>
+            <div class="numeric-adjustment">
+                <button class="negative-btn" id="decrease-membership-btn" onclick="decreaseMemberships()">-</button>
+                <input placeholder="0" type="number" id="membershipCount">
+                <button class="positive-btn" id="increase-membership-btn" onclick="increaseMemberships()">+</button>
+            </div>
+        </div> -->
+        <!-- <div class="submit-btn-container">
+            <button type="button" class="submit-btn" onclick="calculatePerformance()">Submit</button>
+        </div> -->
+    </div>
+    <script src="Script.js"></script>
+    <script>
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('./sw.js')
+            .then(reg => console.log('Service Worker registered!', reg))
+            .catch(err => console.error('Service Worker registration failed:', err));
+        });
+      }
+    </script>
+</body>
